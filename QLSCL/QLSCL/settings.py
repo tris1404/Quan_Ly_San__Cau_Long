@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'Payment_Mng',
     'Court_Mng',
     'System_Mng',
-    'home',
+    'app_home',
 ]
 
 MIDDLEWARE = [
