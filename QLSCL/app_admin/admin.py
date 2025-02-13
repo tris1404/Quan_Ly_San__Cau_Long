@@ -1,3 +1,7 @@
 from django.contrib import admin
+from .models import Court, Customer, Booking
 
-# Register your models here.
+
+admin.site.register(Court)
+admin.site.register(Customer)
+admin.site.register(Booking)

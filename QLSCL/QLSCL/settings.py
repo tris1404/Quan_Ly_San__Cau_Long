@@ -37,9 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Customers_Mng',
-    'Booking_Mng',
-    'Payment_Mng',
     'app_home',
     'app_admin'
 ]
@@ -59,7 +56,7 @@ ROOT_URLCONF = 'QLSCL.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "app_home/templates"],  # Kiểm tra có thư mục này không
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
