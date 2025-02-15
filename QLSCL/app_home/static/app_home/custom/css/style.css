@@ -1,0 +1,43 @@
+/* Định dạng thanh tìm kiếm */
+.search-container {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border-radius: 25px;
+    padding: 5px 10px;
+    width: 90%;
+    margin: 15px auto;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.search-container input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 8px 12px;
+    font-size: 16px;
+    border-radius: 25px;
+}
+
+.search-icon,
+.clear-icon {
+    font-size: 18px;
+    color: #333;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.clear-icon {
+    display: none; /* Ẩn ban đầu */
+}
+
+.clear-icon {
+    font-size: 20px; /* Điều chỉnh kích thước */
+    color: black; /* Đổi màu nếu bị trùng với background */
+    display: inline-block; /* Đảm bảo nó không bị ẩn */
+    cursor: pointer;
+}
+
+/* Đảm bảo container chiếm toàn bộ màn hình */
+
+
