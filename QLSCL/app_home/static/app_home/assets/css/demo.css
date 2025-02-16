@@ -10,7 +10,19 @@
 
 .app-brand-logo.demo svg {
   width: 22px;
-  height: 38px;
+  height: 38px;.layout-navbar-fixed .layout-wrapper:not(.layout-horizontal):not(.layout-without-menu) .layout-page {
+    padding-top: 0 !important;
+  }
+  
+  /* Default navbar */
+  .layout-navbar-fixed .layout-wrapper:not(.layout-without-menu) .layout-page {
+    padding-top: 0 !important;
+  }
+  
+  .docs-page .layout-navbar-fixed.layout-wrapper:not(.layout-without-menu) .layout-page,
+  .docs-page .layout-menu-fixed.layout-wrapper:not(.layout-without-menu) .layout-page {
+    padding-top: 0 !important;
+  }
 }
 
 .app-brand-text.demo {

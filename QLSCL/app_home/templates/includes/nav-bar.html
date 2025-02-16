@@ -1,29 +1,49 @@
-{% load static %}
-<nav
-            class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
-            id="layout-navbar">
-            <div class="layout-menu-toggle navbar-nav align-items-xl-center me-4 me-xl-0 d-xl-none">
-              <a class="nav-item nav-link px-0 me-xl-6" href="javascript:void(0)">
-                <i class="bx bx-menu bx-md"></i>
-              </a>
-            </div>
+<style>
+  .nav-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100vw;
+      height: 60px;
+      background: white;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+  }
 
-            <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-              <!-- Search -->
-              <div class="navbar-nav align-items-center">
-                <div class="nav-item d-flex align-items-center">
-                  <i class="bx bx-search bx-md"></i>
-                  <input
-                    type="text"
-                    class="form-control border-0 shadow-none ps-1 ps-sm-2"
-                    placeholder="Search..."
-                    aria-label="Search..." />
-                </div>
-              </div>
-              <!-- /Search -->
+  .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 14px;
+      color: gray;
+  }
 
-              <ul class="navbar-nav flex-row align-items-center ms-auto">
-                <!-- Place this tag where you want the button to render. -->
-              </ul>
-            </div>
-          </nav>
+  .nav-item img {
+      width: 24px;
+      height: 24px;
+  }
+
+  .nav-item:hover {
+      color: black;
+  }
+</style>
+
+<div class="nav-bar">
+  <div class="nav-item" onclick="showMap()">
+      <img src="https://cdn-icons-png.flaticon.com/512/684/684908.png" alt="Map">
+      <span>Bản đồ</span>
+  </div>
+  <div class="nav-item" onclick="showList()">
+      <img src="https://cdn-icons-png.flaticon.com/512/747/747310.png" alt="List">
+      <span>Danh sách</span>
+  </div>
+  <div class="nav-item" onclick="showAccount()">
+      <img src="https://cdn-icons-png.flaticon.com/512/456/456212.png" alt="Account">
+      <span>Tài khoản</span>
+  </div>
+</div>

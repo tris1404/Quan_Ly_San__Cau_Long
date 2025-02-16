@@ -1,9 +1,8 @@
 {% extends "master-page.html" %}
-
+{% load static %}
 
 {% block content %}
 <style>
-    /* Ẩn thanh cuộn và chỉnh full màn hình */
     body, html {
         margin: 0;
         padding: 0;
@@ -12,7 +11,6 @@
         width: 100vw;
     }
 
-    /* Bản đồ full màn hình */
     .map-container {
         width: 100vw;
         height: 100vh;
@@ -21,21 +19,167 @@
         left: 0;
     }
 
-    /* Đảm bảo iframe không gây thanh cuộn */
     .map-container iframe {
         width: 100%;
         height: 100%;
         display: block;
         border: 0;
     }
+
+    .search-container {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-index: 1000;
+        background: white;
+        padding: 10px;
+        border-radius: 30px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 33vw;
+    }
+
+    .search-container input {
+        flex: 1;
+        padding: 10px;
+        border: none;
+        outline: none;
+        font-size: 16px;
+        border-radius: 30px;
+    }
+
+    .search-icon {
+        width: 22px;
+        height: 22px;
+        cursor: pointer;
+    }
+
+    .clear-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 18px;
+        color: gray;
+        padding: 0 5px;
+    }
+
+    .clear-btn:hover {
+        color: black;
+    }
+    
 </style>
 
-<div class="map-container">
+<!-- Thanh tìm kiếm -->
+<div class="search-container">
+    <img src="https://cdn-icons-png.flaticon.com/512/149/149852.png" class="search-icon" alt="Search">
+    <input type="text" id="search-input" placeholder="Nhập địa điểm...">
+    <button class="clear-btn" onclick="clearSearch()">×</button>
+</div>
+
+<!-- Bản đồ -->
+<div class="map-container" id="map-container">
     <iframe 
+        id="map-frame"
         src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d501407.3792079764!2d106.637108!3d10.9448453!3m2!1i1024!2i768!4f13.1!5e0!3m2!1svi!2s!4v1739517716709!5m2!1svi!2s" 
         allowfullscreen 
         loading="lazy" 
         referrerpolicy="no-referrer-when-downgrade">
     </iframe>
 </div>
+
+
+
+<!-- Danh sách sân cầu lông -->
+
+<div id="badminton-list" style="display:none; position:absolute; top:60px; left:0; width:100%; height:auto; background:white; overflow:auto; padding: 10px; z-index: 100;">
+
+    <!-- Thanh tìm kiếm -->
+    <div class="search-container" style="width: 100vw; border-radius: 0; position: fixed; top: 0; left: 0; background: white; padding: 10px; z-index: 101;">
+        <img src="https://cdn-icons-png.flaticon.com/512/149/149852.png" class="search-icon" alt="Search">
+        <input type="text" id="search-badminton" placeholder="Nhập tên sân cầu lông...">
+        <button class="clear-btn" onclick="document.getElementById('search-badminton').value = '';">&times;</button>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 15px; padding: 20px 10px 10px;">
+        <!-- Sân cầu lông 1 -->
+        <div style="display: flex; align-items: center; background: #f8f8f8; padding: 10px; border-radius: 10px;">
+            <img src="https://via.placeholder.com/80" alt="Sân 1" style="border-radius: 10px; width: 80px; height: 80px; object-fit: cover; margin-right: 15px;">
+            <div style="flex-grow: 1;">
+                <h3 style="margin: 0;">Sân Cầu Lông A</h3>
+                <p style="margin: 5px 0;">Địa chỉ: Quận 1, TP.HCM</p>
+                <p style="margin: 5px 0;">⭐️⭐️⭐️⭐️☆ (4.5/5)</p>
+            </div>
+            <!-- Nút bản đồ (hình tròn) -->
+            <button onclick="showMap()" style="width: 40px; height: 40px; border-radius: 50%; background: #007bff; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; margin-right: 5px;">
+                <img src="https://cdn-icons-png.flaticon.com/512/684/684908.png" alt="Bản đồ" style="width: 20px; height: 20px;">
+            </button>
+            <!-- Nút đặt lịch -->
+            <button style="padding: 5px 15px; background: #28a745; color: white; border: none; cursor: pointer; border-radius: 5px;">Đặt lịch</button>
+        </div>
+
+        <!-- Sân cầu lông 2 -->
+        <div style="display: flex; align-items: center; background: #f8f8f8; padding: 10px; border-radius: 10px;">
+            <img src="https://via.placeholder.com/80" alt="Sân 2" style="border-radius: 10px; width: 80px; height: 80px; object-fit: cover; margin-right: 15px;">
+            <div style="flex-grow: 1;">
+                <h3 style="margin: 0;">Sân Cầu Lông B</h3>
+                <p style="margin: 5px 0;">Địa chỉ: Quận 3, TP.HCM</p>
+                <p style="margin: 5px 0;">⭐️⭐️⭐️⭐️⭐️ (5/5)</p>
+            </div>
+            <button onclick="showMap()" style="width: 40px; height: 40px; border-radius: 50%; background: #007bff; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; margin-right: 5px;">
+                <img src="https://cdn-icons-png.flaticon.com/512/684/684908.png" alt="Bản đồ" style="width: 20px; height: 20px;">
+            </button>
+            <button style="padding: 5px 15px; background: #28a745; color: white; border: none; cursor: pointer; border-radius: 5px;">Đặt lịch</button>
+        </div>
+        <!-- Sân cầu lông 33 -->
+        <div style="display: flex; align-items: center; background: #f8f8f8; padding: 10px; border-radius: 10px;">
+            <img src="{% static 'app_home/custom/img/avatar/avatar-court1.png' %}" alt="Sân 1" 
+             style="border-radius: 10px; width: 80px; height: 80px; object-fit: cover; margin-right: 15px;">
+            <div style="flex-grow: 1;">
+                <h3 style="margin: 0;">Sân Cầu Lông Quận 12</h3>
+             <p style="margin: 5px 0;">Địa chỉ: 70 Đ. Tô Ký, Tân Chánh Hiệp, Quận 12, Hồ Chí Minh, Việt Nam</p>
+                <p style="margin: 5px 0;">⭐️⭐️⭐️⭐️☆ (4.5/5)</p>
+        </div>
+        <button onclick="openMap(10.865854617606486, 106.61807491730855)" style="width: 40px; height: 40px; border-radius: 50%; background: #007bff; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; margin-right: 5px;">
+            <img src="https://cdn-icons-png.flaticon.com/512/684/684908.png" alt="Bản đồ" style="width: 20px; height: 20px;">
+        </button>
+        <button style="padding: 5px 15px; background: #28a745; color: white; border: none; cursor: pointer; border-radius: 5px;">Đặt lịch</button>
+    </div>
+        <!-- Thêm sân cầu lông khác ở đây -->
+    </div>
+
+    <button onclick="hideList()" style="display: block; margin: 20px auto; padding: 10px 20px;">Quay lại</button>
+</div>
+
+
+
+<script>
+
+    function openMap(lat, lng) {
+        window.open(`https://www.google.com/maps?q=${lat},${lng}`, '_blank');
+    }
+    function showMap() {
+        document.getElementById("map-container").style.display = "block";
+        document.getElementById("badminton-list").style.display = "none";
+        document.getElementById("search-input").parentElement.style.display = "flex"; 
+        document.getElementById("search-badminton").parentElement.style.display = "none"; 
+    }
+    
+    function showList() {
+        document.getElementById("map-container").style.display = "none";
+        document.getElementById("badminton-list").style.display = "block";
+        document.getElementById("search-input").parentElement.style.display = "none"; 
+        document.getElementById("search-badminton").parentElement.style.display = "flex"; 
+    }
+    
+    function hideList() {
+        showMap();
+    }
+    
+    function showAccount() {
+        alert("Chuyển đến trang tài khoản!");
+    }
+   
+</script>
 {% endblock %}
