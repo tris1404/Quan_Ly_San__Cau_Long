@@ -27,3 +27,11 @@ def courtEdit(request):
         'court': courts,
     }
     return HttpResponse(template.render(context, request))
+
+def courtBooking(request):
+    courts = Court.objects.all()
+    template = loader.get_template('app_home/court/court-booking.html')
+    context = {
+        'court': courts,
+    }
+    return HttpResponse(template.render(context, request))

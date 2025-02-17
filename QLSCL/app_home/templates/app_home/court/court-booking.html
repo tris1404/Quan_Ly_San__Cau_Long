@@ -1,0 +1,29 @@
+{% extends "master-page.html" %}
+{% load static %}
+
+{% block content %}
+<!-- Liên kết tới file CSS -->
+<link rel="stylesheet" href="{% static 'app_home/custom/css/style.css' %}">
+
+<div class="content-wrapper">
+
+    <!-- Vùng 1/4 phía trên -->
+    <div class="header">
+        <!-- Nút mũi tên quay lại ở góc trái -->
+        <button onclick="window.history.back();" class="back-button">
+            <img src="https://cdn-icons-png.flaticon.com/256/507/507257.png" alt="Back" class="back-icon">
+        </button>
+
+        <!-- Tiêu đề "Đặt lịch ngày trực quan" -->
+        <h2 class="title">Đặt lịch ngày trực quan</h2>
+    </div>
+
+    <!-- Vùng 3/4 phía dưới sẽ được chỉnh sau -->
+    <div class="main-content">
+        <h2>Vùng 3/4 phía dưới</h2>
+    </div>
+</div>
+
+<!-- Liên kết tới file JS -->
+<script src="{% static 'app_home/custom/js/style.js' %}"></script>
+{% endblock %}
